@@ -1,0 +1,29 @@
+#eclipse ignore
+.metadata
+.settings
+**/.classpath
+
+#package file
+*.class
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+#maven ignore
+target
+build
+
+
+# temp file
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+.pmd
+
+# system ignore
+Thumbs.db
+RemoteSystemsTempFiles

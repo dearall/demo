@@ -1,0 +1,16 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.dearall.demo.log</groupId>
+  <artifactId>log-demo</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>log demo</name>
+  <description>java log demo</description>
+  <modules>
+  	<module>demo-parent</module>
+  	<module>demo-log4j</module>
+  	<module>demo-slf4j-log4j</module>
+  	<module>demo-log4j2</module>
+  	<module>demo-slf4j-log4j2</module>
+  </modules>
+</project>

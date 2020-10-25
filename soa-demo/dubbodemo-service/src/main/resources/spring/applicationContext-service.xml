@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://dubbo.apache.org/schema/dubbo" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 引入 dubbo -->
+	<dubbo:application name="dubbodemo-service">
+		<dubbo:parameter key="qos.enable" value="true" />
+		<dubbo:parameter key="qos.accept.foreign.ip" value="true" />
+		<dubbo:parameter key="qos.port" value="22222" />
+	</dubbo:application>
+    <dubbo:protocol name="dubbo" port="20881"/>
+    <dubbo:registry address="zookeeper://zookeeper.sansovo.org:2181"/>
+    <dubbo:annotation package="org.sansovo.dubbodemo.service.impl" />
+    
+<!--<bean id="userService" class="org.sansovo.dubbodemo.service.impl.UserServiceImpl"/> -->
+    <!-- 增加暴露远程服务配置 -->
+<!--<dubbo:service ref="userService" interface="org.sansovo.dubbodemo.service.UserService"/> -->
+   
+</beans>
