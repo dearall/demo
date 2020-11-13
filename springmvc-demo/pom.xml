@@ -9,5 +9,14 @@
   <modules>
   	<module>springmvc-parent</module>
   	<module>spring-intro</module>
+  	<module>appdesign1</module>
+  	<module>appdesign2</module>
+  	<module>appdesign3</module>
+  	<module>appdesign4</module>
+  	<module>springmvc-intro1</module>
+  	<module>springmvc-intro2</module>
+  	<module>annotated1</module>
+  	<module>annotated2</module>
+  	<module>tags-demo</module>
   </modules>
 </project>
