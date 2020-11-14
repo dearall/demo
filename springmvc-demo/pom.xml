@@ -18,5 +18,6 @@
   	<module>annotated1</module>
   	<module>annotated2</module>
   	<module>tags-demo</module>
+  	<module>converter-demo</module>
   </modules>
 </project>
