@@ -19,5 +19,13 @@
   	<module>annotated2</module>
   	<module>tags-demo</module>
   	<module>converter-demo</module>
+  	<module>spring-validator</module>
+  	<module>jstl-demo</module>
+  	<module>iterator</module>
+  	<module>i18n</module>
+    <module>upload1</module>
+    <module>upload2</module>
+    <module>download</module>
+    <module>unit-test</module>
   </modules>
 </project>
