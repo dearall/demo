@@ -33,13 +33,15 @@
 		<cobertura-maven-plugin.version>2.7</cobertura-maven-plugin.version>
 		<cargo.version>1.8.0</cargo.version>
 		<jetty.version>9.4.31.v20200723</jetty.version>
-		
+
 		<junit.version>4.13</junit.version>
-  		<hamcrest.version>1.3</hamcrest.version>
-  		<mockito-all.version>2.0.2-beta</mockito-all.version>
+		<hamcrest.version>1.3</hamcrest.version>
+		<mockito-all.version>2.0.2-beta</mockito-all.version>
+		<mockito-core.version>3.6.0</mockito-core.version>
 
 		<slf4j.version>1.7.25</slf4j.version>
 		<log4j.version>2.13.3</log4j.version>
+		<disruptor.version>3.4.2</disruptor.version>
 		<commons-logging.version>1.2</commons-logging.version>
 
 		<pdfbox.version>1.8.10</pdfbox.version>
@@ -87,26 +89,25 @@
 				<artifactId>fontbox</artifactId>
 				<version>${pdfbox.version}</version>
 			</dependency>
+			<!-- slf4j -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
 				<version>${slf4j.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>commons-logging</groupId>
-				<artifactId>commons-logging</artifactId>
-				<version>${commons-logging.version}</version>
-			</dependency>
+			<!-- 适配包 将 commos logging 重定向到 slf4j -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
+				<artifactId>jcl-over-slf4j</artifactId>
 				<version>${slf4j.version}</version>
 			</dependency>
+			<!-- log4j2 的桥接包 -->
 			<dependency>
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-slf4j-impl</artifactId>
 				<version>${log4j.version}</version>
 			</dependency>
+			<!-- log4j2 -->
 			<dependency>
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-api</artifactId>
@@ -123,6 +124,28 @@
 				<version>${log4j.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>com.lmax</groupId>
+				<artifactId>disruptor</artifactId>
+				<version>${disruptor.version}</version>
+			</dependency>
+			<!-- spring 使用的 commons-logging -->
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>${commons-logging.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<!-- Apache Commons Logging Bridge -->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-jcl</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-context</artifactId>
 				<version>${springframework.version}</version>
@@ -136,6 +159,7 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-test</artifactId>
 				<version>${springframework.version}</version>
+				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
@@ -158,21 +182,28 @@
 				<version>${commons-io.version}</version>
 			</dependency>
 			<dependency>
-		  		<groupId>junit</groupId>
-		  		<artifactId>junit</artifactId>
-		  		<version>${junit.version}</version>
-		  		<scope>test</scope>
-		  	</dependency>
-		  	<dependency>
-		  		<groupId>org.hamcrest</groupId>
-		  		<artifactId>hamcrest-core</artifactId>
-		  		<version>${hamcrest.version}</version>
-		  		<scope>test</scope>
-		  	</dependency>
-		  	<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.hamcrest</groupId>
+				<artifactId>hamcrest-core</artifactId>
+				<version>${hamcrest.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
 				<groupId>org.mockito</groupId>
 				<artifactId>mockito-all</artifactId>
 				<version>${mockito-all.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>${mockito-core.version}</version>
+				<scope>test</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

@@ -27,5 +27,6 @@
     <module>upload2</module>
     <module>download</module>
     <module>unit-test</module>
+    <module>integration-test</module>
   </modules>
 </project>
