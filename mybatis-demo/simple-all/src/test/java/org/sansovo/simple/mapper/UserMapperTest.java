@@ -11,6 +11,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.sansovo.simple.model.SysRole;
 import org.sansovo.simple.model.SysUser;
+import org.sansovo.simple.type.Enabled;
 
 
 public class UserMapperTest extends BaseMapperTest {
@@ -67,14 +68,14 @@ public class UserMapperTest extends BaseMapperTest {
 			sqlSession.close();
 		}
 	}
-/*	
+	
 	@Test
 	public void testSelectRolesByUserIdAndRoleEnabled(){
 		SqlSession sqlSession = getSqlSession();
 		try {
 			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 			//调用 selectRolesByUserIdAndRoleEnabled 方法查询用户的角色
-			List<SysRole> roleList = userMapper.selectRolesByUserIdAndRoleEnabled(1L, null);
+			List<SysRole> roleList = userMapper.selectRolesByUserIdAndRoleEnabled(1L, 1);
 			//结果不为空
 			Assert.assertNotNull(roleList);
 			//角色数量大于 0 个
@@ -105,7 +106,7 @@ public class UserMapperTest extends BaseMapperTest {
 			sqlSession.close();
 		}
 	}
-	*/
+	
 	@Test
 	public void testInsert(){
 		SqlSession sqlSession = getSqlSession();
@@ -157,7 +158,34 @@ public class UserMapperTest extends BaseMapperTest {
 			System.out.println("user.id = " + user.getId());
 			
 		} finally {
-			sqlSession.rollback();
+			sqlSession.commit();
+			//不要忘记关闭 sqlSession
+			sqlSession.close();
+		}
+	}
+	
+	@Test
+	public void testInsert3(){
+		SqlSession sqlSession = getSqlSession();
+		try {
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			//创建一个 user 对象
+			SysUser user = new SysUser();
+			user.setUserName("test1");
+			user.setUserPassword("123456");
+			user.setUserEmail("test@mybatis.tk");
+			user.setUserInfo("test info");
+			user.setHeadImg(new byte[]{1,2,3});
+			user.setCreateTime(new Date());
+			int result = userMapper.insert3(user);
+			//只插入 1 条数据
+			Assert.assertEquals(1, result);
+			//因为 id 回写，所以 id 不为 null
+			Assert.assertNotNull(user.getId());
+			System.out.println("user.id = " + user.getId());
+			
+		} finally {
+			sqlSession.commit();
 			//不要忘记关闭 sqlSession
 			sqlSession.close();
 		}
@@ -186,7 +214,7 @@ public class UserMapperTest extends BaseMapperTest {
 			sqlSession.close();
 		}
 	}
-	
+	*/
 	@Test
 	public void testUpdateById(){
 		SqlSession sqlSession = getSqlSession();
@@ -250,7 +278,7 @@ public class UserMapperTest extends BaseMapperTest {
 			sqlSession.close();
 		}
 	}
-	
+/*	
 	@Test
 	public void testSelectByUser(){
 		SqlSession sqlSession = getSqlSession();
