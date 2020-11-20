@@ -9,5 +9,6 @@
   <modules>
   	<module>mybatis-parent</module>
   	<module>simple</module>
+  	<module>simple-all</module>
   </modules>
 </project>
