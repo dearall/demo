@@ -32,11 +32,11 @@
 
     <mappers>
         <mapper resource="org/sansovo/simple/mapper/CountryMapper.xml"/>  
-        <mapper resource="org/sansovo/simple/mapper/UserMapper.xml"/>
-<!--        
+        <mapper resource="org/sansovo/simple/mapper/UserMapper.xml"/> 
 		<mapper resource="org/sansovo/simple/mapper/RoleMapper.xml"/>
         <mapper resource="org/sansovo/simple/mapper/PrivilegeMapper.xml"/>
-        <mapper resource="org/sansovo/simple/mapper/UserRoleMapper.xml"/>
+        
+ <!--       <mapper resource="org/sansovo/simple/mapper/UserRoleMapper.xml"/>
         <mapper resource="org/sansovo/simple/mapper/RolePrivilegeMapper.xml"/>
         -->
         <!--  

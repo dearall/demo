@@ -40,8 +40,37 @@
 	    <artifactId>mybatis</artifactId>
 	</dependency>
 	<dependency>
+	    <groupId>org.mybatis.generator</groupId>
+	    <artifactId>mybatis-generator-core</artifactId>
+	</dependency>
+	<dependency>
 	    <groupId>mysql</groupId>
 	    <artifactId>mysql-connector-java</artifactId>
 	</dependency>
   </dependencies>
+  <build>
+  	<plugins>
+ 		<plugin>
+		    <groupId>org.mybatis.generator</groupId>
+		    <artifactId>mybatis-generator-maven-plugin</artifactId>
+			<configuration>
+				<configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>
+				<overwrite>true</overwrite>
+				<verbose>true</verbose>
+			</configuration>
+			<dependencies>
+				<dependency>
+					<groupId>mysql</groupId>
+					<artifactId>mysql-connector-java</artifactId>
+					<version>${mysql-connector-java.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.sansovo.demo</groupId>
+					<artifactId>simple-all</artifactId>
+					<version>1.0.0-SNAPSHOT</version>
+				</dependency>
+			</dependencies>
+		</plugin>
+  	</plugins>
+  </build>
 </project>

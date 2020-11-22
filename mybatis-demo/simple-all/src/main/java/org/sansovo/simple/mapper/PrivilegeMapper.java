@@ -12,14 +12,14 @@ import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.session.RowBounds;
 
 import org.sansovo.simple.model.SysPrivilege;
-//import org.sansovo.simple.provider.PrivilegeProvider;
+import org.sansovo.simple.provider.PrivilegeProvider;
 
 @CacheNamespace
 public interface PrivilegeMapper {
-/*
+
 	@SelectProvider(type = PrivilegeProvider.class, method = "selectById")
 	SysPrivilege selectById(Long id);
-	
+/*	
 	@SelectProvider(type = PrivilegeProvider.class, method = "selectByPrivilege")
 	List<SysPrivilege> selectByPrivilege(SysPrivilege privilege);
 	

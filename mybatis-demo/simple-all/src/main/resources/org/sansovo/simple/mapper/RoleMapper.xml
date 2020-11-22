@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 					"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.sansovo.simple.model.SysRole">
+<mapper namespace="org.sansovo.simple.mapper.RoleMapper">
 	<cache/>
-	<resultMap id="roleMap" type="tk.mybatis.simple.model.SysRole">
+	<resultMap id="roleMap" type="org.sansovo.simple.model.SysRole">
 		<id property="id" column="id"/>
 		<result property="roleName" column="role_name"/>
 		<result property="enabled" column="enabled"/>
-		<association property="createInfo" javaType="tk.mybatis.simple.model.CreateInfo">
+		<association property="createInfo" javaType="org.sansovo.simple.model.CreateInfo">
 			<result property="createBy" column="create_by"/>
 			<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
 		</association>
 	</resultMap>
 	
-	<resultMap id="rolePrivilegeListMap" extends="roleMap" type="tk.mybatis.simple.model.SysRole">
+	<resultMap id="rolePrivilegeListMap" extends="roleMap" type="org.sansovo.simple.model.SysRole">
 		<collection property="privilegeList" columnPrefix="privilege_" 
-					resultMap="tk.mybatis.simple.mapper.PrivilegeMapper.privilegeMap"/>
+					resultMap="org.sansovo.simple.mapper.PrivilegeMapper.privilegeMap"/>
 	</resultMap>
 	
-	<resultMap id="rolePrivilegeListMapSelect" extends="roleMap" type="tk.mybatis.simple.model.SysRole">
+	<resultMap id="rolePrivilegeListMapSelect" extends="roleMap" type="org.sansovo.simple.model.SysRole">
 		<collection property="privilegeList" 
 					fetchType="lazy"
-					select="tk.mybatis.simple.mapper.PrivilegeMapper.selectPrivilegeByRoleId"
+					select="org.sansovo.simple.mapper.PrivilegeMapper.selectPrivilegeByRoleId"
 					column="{roleId=id}"/>
 	</resultMap>
 	
 	
-	<resultMap id="rolePrivilegeListMapChoose" type="tk.mybatis.simple.model.SysRole">
+	<resultMap id="rolePrivilegeListMapChoose" type="org.sansovo.simple.model.SysRole">
 		<discriminator column="enabled" javaType="int">
 			<case value="1" resultMap="rolePrivilegeListMapSelect"/>
 			<case value="0" resultMap="roleMap"/>

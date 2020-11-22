@@ -190,7 +190,7 @@ public class UserMapperTest extends BaseMapperTest {
 			sqlSession.close();
 		}
 	}
-/*	
+	
 	@Test
 	public void testInsert2Selective(){
 		SqlSession sqlSession = getSqlSession();
@@ -214,7 +214,7 @@ public class UserMapperTest extends BaseMapperTest {
 			sqlSession.close();
 		}
 	}
-	*/
+	
 	@Test
 	public void testUpdateById(){
 		SqlSession sqlSession = getSqlSession();
@@ -278,7 +278,7 @@ public class UserMapperTest extends BaseMapperTest {
 			sqlSession.close();
 		}
 	}
-/*	
+	
 	@Test
 	public void testSelectByUser(){
 		SqlSession sqlSession = getSqlSession();
@@ -427,7 +427,7 @@ public class UserMapperTest extends BaseMapperTest {
 			sqlSession.close();
 		}
 	}
-	
+/*	
 	@Test
 	public void testSelectUserAndRoleById(){
 		//获取 sqlSession
