@@ -7,11 +7,15 @@
 	<!-- <classPathEntry location="G:\.m2\repository\mysql\mysql-connector-java\5.1.49\mysql-connector-java-5.1.49.jar"/> -->
 	
     <context id="MySqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
+    	<property name="autoDelimitKeywords" value="true"/>
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
+        
         <property name="javaFileEncoding" value="UTF-8"/>
+        <property name="targetJava8" value="true"/>
 
         <commentGenerator type="org.sansovo.generator.MyCommentGenerator">
+        	<property name="suppressAllComments" value="false"/>  <!-- this is the default value -->
             <property name="suppressDate" value="true"/>
             <property name="addRemarkComments" value="true"/>
         </commentGenerator>
@@ -23,16 +27,18 @@
         </jdbcConnection>
 
         <javaModelGenerator targetPackage="test.model" targetProject="src\main\java">
-            <property name="trimStrings" value="true" />
+            <property name="trimStrings" value="false" />  <!-- this is the default value -->
             <property name="rootClass" value="org.sansovo.simple.model.BaseEntity" />
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="test.xml"  targetProject="src\main\resources"/>
+        <sqlMapGenerator targetPackage="test.xml"  targetProject="src\main\resources">
+        	<property name="enableSubPackages" value="false"/>  <!-- this is the default value -->
+        </sqlMapGenerator>
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="test.dao"  targetProject="src\main\java"/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="test.dao"  targetProject="src\main\java" />
 
         <table tableName="%">
-            <generatedKey column="id" sqlStatement="MySql"/>
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
     </context>
 </generatorConfiguration>

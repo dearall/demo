@@ -1,10 +1,18 @@
 package org.sansovo.simple.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 public class SysUser implements Serializable {
+	@Override
+	public String toString() {
+		return "SysUser [id=" + id + ", userName=" + userName + ", userPassword=" + userPassword + ", userEmail="
+				+ userEmail + ", userInfo=" + userInfo + ", headImg=" + Arrays.toString(headImg) + ", createTime="
+				+ createTime + ", role=" + role + "]";
+	}
+
 	private static final long serialVersionUID = -2907954398998242290L;
 
 	/**

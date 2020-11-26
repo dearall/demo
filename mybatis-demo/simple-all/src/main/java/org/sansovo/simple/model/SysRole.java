@@ -10,6 +10,13 @@ import org.sansovo.simple.type.Enabled;
  * 角色表
  */
 public class SysRole implements Serializable {
+	@Override
+	public String toString() {
+		return "SysRole [id=" + id + ", roleName=" + roleName + ", enabled=" + enabled + ", createBy=" + createBy
+				+ ", createTime=" + createTime + ", createInfo=" + createInfo + ", privilegeList=" + privilegeList
+				+ "]";
+	}
+
 	private static final long serialVersionUID = 6320941908222932112L;
 	/**
 	 * 角色ID

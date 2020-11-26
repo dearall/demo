@@ -6,6 +6,8 @@
     <settings>
         <setting name="logImpl" value="LOG4J2"/>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>  <!-- this is the default value, true in ≤3.4.1-->
+    	<setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString "/>  <!-- this is the default value -->
     </settings>
     
     <typeAliases>

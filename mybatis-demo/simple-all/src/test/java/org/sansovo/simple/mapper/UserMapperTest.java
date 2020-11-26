@@ -427,7 +427,7 @@ public class UserMapperTest extends BaseMapperTest {
 			sqlSession.close();
 		}
 	}
-/*	
+	
 	@Test
 	public void testSelectUserAndRoleById(){
 		//获取 sqlSession
@@ -444,6 +444,30 @@ public class UserMapperTest extends BaseMapperTest {
 			Assert.assertNotNull(user);
 			//user.role 也不为空
 			Assert.assertNotNull(user.getRole());
+			System.out.println(user);
+		} finally {
+			//不要忘记关闭 sqlSession
+			sqlSession.close();
+		}
+	}
+
+	@Test
+	public void testSelectUserAndRoleById2(){
+		//获取 sqlSession
+		SqlSession sqlSession = getSqlSession();
+		try {
+			//获取 UserMapper 接口
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			//特别注意，在我们测试数据中，id = 1L 的用户有两个角色
+			//由于后面覆盖前面的，因此只能得到最后一个角色
+			//我们这里使用只有一个角色的用户（id = 1001L）
+			//可以用 selectUserAndRoleById2 替换进行测试
+			SysUser user = userMapper.selectUserAndRoleById2(1001L);
+			//user 不为空
+			Assert.assertNotNull(user);
+			//user.role 也不为空
+			Assert.assertNotNull(user.getRole());
+			System.out.println(user);
 		} finally {
 			//不要忘记关闭 sqlSession
 			sqlSession.close();
@@ -463,17 +487,23 @@ public class UserMapperTest extends BaseMapperTest {
 			SysUser user = userMapper.selectUserAndRoleByIdSelect(1001L);
 			//user 不为空
 			Assert.assertNotNull(user);
-			//user.role 也不为空
+			
 			System.out.println("调用 user.equals(null)");
-			user.equals(null);
+			user.equals(null);	//默认方法为: equals, clone, hashCode, toString 会调用延迟加载对象的全部数据 
+			//user.role 也不为空
+			
 			System.out.println("调用 user.getRole()");
 			Assert.assertNotNull(user.getRole());
+			
+			
+			System.out.println(user);
+
 		} finally {
 			//不要忘记关闭 sqlSession
 			sqlSession.close();
 		}
 	}
-	
+/*	
 	@Test
 	public void testSelectAllUserAndRoles(){
 		//获取 sqlSession
