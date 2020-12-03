@@ -8,6 +8,7 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <setting name="aggressiveLazyLoading" value="false"/>  <!-- this is the default value, true in ≤3.4.1-->
     	<setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString "/>  <!-- this is the default value -->
+    	<setting name="cacheEnabled" value="true"/> <!-- this is the default value -->
     </settings>
     
     <typeAliases>
@@ -18,6 +19,14 @@
 			javaType="org.sansovo.simple.type.Enabled" 
 			handler="org.sansovo.simple.type.EnabledTypeHandler"/>
 	</typeHandlers>
+	
+	<plugins>		 
+		<plugin interceptor="org.sansovo.simple.plugin.PageInterceptor">
+			<property name="dialect" value="org.sansovo.simple.plugin.MySqlDialect"/>
+		</plugin>
+		<plugin interceptor="org.sansovo.simple.plugin.CameHumpInterceptor"/> 
+	</plugins>
+	
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC">

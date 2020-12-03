@@ -9,6 +9,7 @@
 	</resultMap>
 	
 	<select id="selectPrivilegeByRoleId" resultMap="privilegeMap">
+	<bind name="print" value="@org.sansovo.util.StringUtil@print(_parameter)"/>
 		select p.* 
 		from sys_privilege p
 		inner join sys_role_privilege rp on rp.privilege_id = p.id

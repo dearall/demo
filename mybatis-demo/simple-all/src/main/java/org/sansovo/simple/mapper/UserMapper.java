@@ -179,6 +179,13 @@ public interface UserMapper {
 	List<SysUser> selectAllUserAndRoles();
 	
 	/**
+	 * 获取所有的用户以及对应的所有角色、权限
+	 * 
+	 * @return
+	 */
+	List<SysUser> selectAllUserAndRolesAndPrivilege();
+	
+	/**
 	 * 通过嵌套查询获取指定用户的信息，以及用户的角色和权限信息
 	 * 
 	 * @param id

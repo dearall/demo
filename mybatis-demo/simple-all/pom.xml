@@ -14,7 +14,6 @@
 	<dependency>
 		<groupId>junit</groupId>
 		<artifactId>junit</artifactId>
-		<scope>test</scope>
 	</dependency>
 	<!-- slf4j -->
 	<dependency>
@@ -36,6 +35,10 @@
 		<artifactId>log4j-core</artifactId>
 	</dependency>
 	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	</dependency>
+	<dependency>
 	    <groupId>org.mybatis</groupId>
 	    <artifactId>mybatis</artifactId>
 	</dependency>
@@ -44,8 +47,16 @@
 	    <artifactId>mybatis-generator-core</artifactId>
 	</dependency>
 	<dependency>
-	    <groupId>mysql</groupId>
-	    <artifactId>mysql-connector-java</artifactId>
+	  <groupId>org.mybatis</groupId>
+	  <artifactId>mybatis-typehandlers-jsr310</artifactId>
+	</dependency>
+	<dependency>
+	  <groupId>org.mybatis.caches</groupId>
+	  <artifactId>mybatis-ehcache</artifactId>
+	</dependency>
+	<dependency>
+	  <groupId>com.github.pagehelper</groupId>
+	  <artifactId>pagehelper</artifactId>
 	</dependency>
   </dependencies>
   <build>

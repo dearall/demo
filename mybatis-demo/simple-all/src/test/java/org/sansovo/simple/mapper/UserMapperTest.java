@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Assert;
 import org.junit.Test;
+import org.sansovo.simple.model.SysPrivilege;
 import org.sansovo.simple.model.SysRole;
 import org.sansovo.simple.model.SysUser;
 import org.sansovo.simple.type.Enabled;
@@ -503,7 +504,7 @@ public class UserMapperTest extends BaseMapperTest {
 			sqlSession.close();
 		}
 	}
-/*	
+	
 	@Test
 	public void testSelectAllUserAndRoles(){
 		//获取 sqlSession
@@ -512,6 +513,27 @@ public class UserMapperTest extends BaseMapperTest {
 			//获取 UserMapper 接口
 			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 			List<SysUser> userList = userMapper.selectAllUserAndRoles();
+			System.out.println("用户数：" + userList.size());
+			for(SysUser user : userList){
+				System.out.println("用户名：" + user.getUserName());
+				for(SysRole role: user.getRoleList()){
+					System.out.println("角色名：" + role.getRoleName());
+				}
+			}
+		} finally {
+			//不要忘记关闭 sqlSession
+			sqlSession.close();
+		}
+	}
+	
+	@Test
+	public void testselectAllUserAndRolesAndPrivilege(){
+		//获取 sqlSession
+		SqlSession sqlSession = getSqlSession();
+		try {
+			//获取 UserMapper 接口
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			List<SysUser> userList = userMapper.selectAllUserAndRolesAndPrivilege();
 			System.out.println("用户数：" + userList.size());
 			for(SysUser user : userList){
 				System.out.println("用户名：" + user.getUserName());
@@ -610,13 +632,14 @@ public class UserMapperTest extends BaseMapperTest {
 			Assert.assertNotNull(user.getId());
 			Assert.assertNotNull(user.getCreateTime());
 			//可以执行下面的 commit 后查看数据库中的数据
-			//sqlSession.commit();
+			sqlSession.commit();
 			//测试删除刚刚插入的数据
 			userMapper.deleteUserById(user.getId());
+			sqlSession.commit();
+			
 		} finally {
 			//不要忘记关闭 sqlSession
 			sqlSession.close();
 		}
 	}
-*/
 }

@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 					"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.sansovo.simple.mapper.RoleMapper">
-	<cache/>
+	<cache />
+	<!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
 	<resultMap id="roleMap" type="org.sansovo.simple.model.SysRole">
 		<id property="id" column="id"/>
 		<result property="roleName" column="role_name"/>
@@ -53,6 +54,7 @@
 	</select>
 	
 	<select id="selectRoleByUserId" resultMap="rolePrivilegeListMapSelect">
+	<bind name="print" value="@org.sansovo.util.StringUtil@print(_parameter)"/>
 		select
 	        r.id,
 			r.role_name, 

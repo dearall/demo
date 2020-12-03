@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import org.sansovo.simple.model.SysPrivilege;
 import org.sansovo.simple.model.SysRole;
-//import org.sansovo.simple.plugin.PageRowBounds;
+import org.sansovo.simple.plugin.PageRowBounds;
 import org.sansovo.simple.type.Enabled;
 
 public class RoleMapperTest extends BaseMapperTest {
@@ -70,7 +70,7 @@ public class RoleMapperTest extends BaseMapperTest {
 			sqlSession.close();
 		}
 	}
-/*	
+	
 	@Test
 	public void testSelectAllRoleAndPrivileges(){
 		//获取 sqlSession
@@ -124,7 +124,7 @@ public class RoleMapperTest extends BaseMapperTest {
 			sqlSession.close();
 		}
 	}
-	
+/*	
 	@Test
 	public void testUpdateById(){
 		//获取 sqlSession
@@ -143,7 +143,7 @@ public class RoleMapperTest extends BaseMapperTest {
 			sqlSession.close();
 		}
 	}
-	
+	*/
 	@Test
 	public void testSelectAllByRowBounds(){
 		SqlSession sqlSession = getSqlSession();
@@ -175,5 +175,4 @@ public class RoleMapperTest extends BaseMapperTest {
 			sqlSession.close();
 		}
 	}
-	*/
 }
