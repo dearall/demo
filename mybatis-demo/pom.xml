@@ -10,5 +10,6 @@
   	<module>mybatis-parent</module>
   	<module>simple</module>
   	<module>simple-all</module>
+  	<module>mybatis-spring-demo</module>
   </modules>
 </project>
