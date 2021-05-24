@@ -1,0 +1,5 @@
+//Gradle5.0 : [#6266] - Remove Task#leftShift
+
+task helloWorld << {
+    println "Hello World"
+}
