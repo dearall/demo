@@ -1,9 +1,18 @@
+plugins {
+    id "org.akhikhl.gretty" version "2.0.0"
+}
 apply plugin: 'java'
 apply plugin: 'war'
-apply plugin: 'jetty'
+
+//This plugin is deprecated and will be removed in Gradle 4.0.
+// Consider using the more feature-rich Gretty plugin instead.
+//apply plugin: 'jetty'
+
+apply plugin: "org.akhikhl.gretty"
 
 repositories {
-    mavenCentral()
+    //mavenCentral()
+    maven { url 'https://maven.aliyun.com/repository/central' }
 }
 
 dependencies {
@@ -11,7 +20,8 @@ dependencies {
     runtime 'javax.servlet:jstl:1.1.2'
 }
 
-jettyRun {
+gretty {
     httpPort = 9090
-    contextPath = 'todo'
+    contextPath ="todo"
+    servletContainer = 'jetty9'
 }

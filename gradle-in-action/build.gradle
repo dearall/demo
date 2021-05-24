@@ -1,11 +1,32 @@
 import com.manning.gia.sanitycheck.tasks.BuildExerciser
 
-ext.supportedGradleVersion = '1.7'
+ext.supportedGradleVersion = '5.6.4'
 
 task verifyListings(type: BuildExerciser, group: 'Gradle in Action', description: 'Verifies that listings can be run successfully.') {
     gradleVersion = supportedGradleVersion
 }
 
+//https://docs.gradle.org/4.8/release-notes.html#deprecations
+//Overwriting Gradle's built-in tasks
+//Defining a custom wrapper or init task is deprecated. Please configure the existing tasks instead.
+//
+//        I.e. instead of this:
+//
+//        task wrapper(type:Wrapper) {
+//    //configuration
+//}
+//
+//Do this:
+//
+//        wrapper {
+//            //configuration
+//        }
+/*
 task wrapper(type: Wrapper) {
+    gradleVersion = supportedGradleVersion
+}
+*/
+
+wrapper{
     gradleVersion = supportedGradleVersion
 }

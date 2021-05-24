@@ -1,5 +1,10 @@
+//操作符 << 在Gradle 4.x中被弃用，并且在Gradle 5.0 被移除了。解决办法直接去掉 << 或者使用doLast 即可解决
 //Gradle5.0 : [#6266] - Remove Task#leftShift
 
-task helloWorld << {
+//task helloWorld << {
+//    println "Hello World"
+//}
+
+task helloWorld {
     println "Hello World"
 }

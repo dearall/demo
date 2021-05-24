@@ -1,9 +1,18 @@
 apply plugin: 'java'
 apply plugin: 'war'
-apply plugin: 'jetty'
+
+plugins {
+    id "org.akhikhl.gretty" version "2.0.0"
+}
+//This plugin is deprecated and will be removed in Gradle 4.0.
+// Consider using the more feature-rich Gretty plugin instead.
+//apply plugin: 'jetty'
+
+apply plugin: "org.akhikhl.gretty"
 
 repositories {
-    mavenCentral()
+    //mavenCentral()
+    maven { url 'https://maven.aliyun.com/repository/central' }
 }
 
 dependencies {

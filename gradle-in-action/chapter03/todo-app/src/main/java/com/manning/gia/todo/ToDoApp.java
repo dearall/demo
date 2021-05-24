@@ -20,3 +20,6 @@ public class ToDoApp {
         }
     }
 }
+
+// run
+// java -cp build/classes/java/main com.manning.gia.todo.ToDoApp
