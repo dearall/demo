@@ -9,12 +9,15 @@ dependencies {
 
 test {
     testLogging {
+        showStandardStreams = true
         exceptionFormat 'full'
         events 'passed', 'skipped', 'failed'
     }
 
     forkEvery = 5
     maxParallelForks = determineMaxParallelForks()
+
+    System.out.println("maxParallelForks: " + maxParallelForks)
 }
 
 def determineMaxParallelForks() {

@@ -49,8 +49,10 @@ task backupReleaseDistribution(type: Copy) {
     into "$buildDir/backup"
 }
 
-task release(dependsOn: backupReleaseDistribution) << {
-    logger.quiet 'Releasing the project...'
+task release(dependsOn: backupReleaseDistribution) {
+    doLast {
+        logger.quiet 'Releasing the project...'
+    }
 }
 
 tasks.addRule("Pattern: increment<Classifier>Version – Increments the project version classifier.") { String taskName ->
