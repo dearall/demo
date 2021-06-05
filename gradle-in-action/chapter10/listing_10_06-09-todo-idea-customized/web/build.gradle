@@ -1,9 +1,13 @@
+plugins {
+    id "org.akhikhl.gretty" version "2.0.0"
+}
 apply plugin: 'war'
-apply plugin: 'jetty'
+apply plugin: 'org.akhikhl.gretty'
 apply plugin: 'groovy'
 
 repositories {
-    mavenCentral()
+    //mavenCentral()
+    maven { url 'https://maven.aliyun.com/repository/central' }
 }
 
 configurations {
@@ -12,14 +16,14 @@ configurations {
 }
 
 ext.seleniumGroup = 'org.seleniumhq.selenium'
-ext.seleniumVersion = '2.32.0'
+ext.seleniumVersion = '3.141.59'
 
 dependencies {
     compile project(':repository')
-    providedCompile 'javax.servlet:servlet-api:2.5'
-    runtime 'javax.servlet:jstl:1.1.2'
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+    runtime 'javax.servlet:jstl:1.2'
     runtime 'taglibs:standard:1.1.2'
-    testCompile 'org.codehaus.groovy:groovy:2.0.6'
+    testCompile 'org.codehaus.groovy:groovy:2.4.21'
     testCompile 'junit:junit:4.11'
     functTestCompile 'org.codehaus.geb:geb-junit4:0.7.2'
     functTestCompile "$seleniumGroup:selenium-api:$seleniumVersion"
@@ -35,32 +39,13 @@ sourceSets {
     }
 }
 
-ext {
-    functionalJettyStopPort = 8081
-    functionalJettyStopKey = 'stopKey'
-}
-
-task functionalJettyRun(type: org.gradle.api.plugins.jetty.JettyRun) {
-    stopPort = functionalJettyStopPort
-    stopKey = functionalJettyStopKey
-    contextPath = 'todo'
-    daemon = true
-}
-
-task functionalJettyStop(type: org.gradle.api.plugins.jetty.JettyStop) {
-    stopPort = functionalJettyStopPort
-    stopKey = functionalJettyStopKey
-}
-
 task functionalTest(type: Test) {
-    testClassesDir = sourceSets.functionalTest.output.classesDir
+    testClassesDirs = sourceSets.functionalTest.output.classesDirs
     classpath = sourceSets.functionalTest.runtimeClasspath
     reports.html.destination = file("$reports.html.destination/functional")
     reports.junitXml.destination = file("$reports.junitXml.destination/functional")
     systemProperty 'geb.env', 'firefox'
     systemProperty 'geb.build.reportsDir', reporting.file("$name/geb")
-    dependsOn functionalJettyRun
-    finalizedBy functionalJettyStop
 }
 
 check.dependsOn functionalTest
@@ -71,7 +56,7 @@ idea {
             testSourceDirs += it
         }
 
-        scopes.TEST.plus += configurations.functTestCompile
-        scopes.TEST.plus += configurations.functTestRuntime
+//    scopes.TEST.plus += configurations.functTestCompile
+//    scopes.TEST.plus += configurations.functTestRuntime
     }
 }

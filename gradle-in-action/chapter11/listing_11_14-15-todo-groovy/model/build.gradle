@@ -1,9 +1,10 @@
 apply plugin: 'groovy'
 
 repositories {
-    mavenCentral()
+    //mavenCentral()
+    maven { url 'https://maven.aliyun.com/repository/central' }
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy-all:2.1.5'
+    compile 'org.codehaus.groovy:groovy-all:2.4.21'
 }

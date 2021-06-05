@@ -1,10 +1,11 @@
 repositories {
     ivy {
         name 'JQuery'
-        url 'http://code.jquery.com'
-        layout 'pattern', {
+        url 'https://code.jquery.com'
+        patternLayout {
             artifact '[module]-[revision](.[classifier]).[ext]'
         }
+//      'src="https://code.jquery.com/jquery-1.12.4.min.js"'
     }
 }
 
@@ -13,7 +14,7 @@ configurations {
 }
 
 dependencies {
-    jquery group: 'jquery', name: 'jquery', version: '1.10.0', classifier: 'min', ext: 'js'
+    jquery group: 'jquery', name: 'jquery', version: '1.12.4', classifier: 'min', ext: 'js'
 }
 
 task fetchExternalJs(type: Copy) {
@@ -21,4 +22,4 @@ task fetchExternalJs(type: Copy) {
     into "$webAppDir/js/ext"
 }
 
-[jettyRun, jettyRunWar, war]*.dependsOn fetchExternalJs
+//[jettyRun, jettyRunWar, war]*.dependsOn fetchExternalJs

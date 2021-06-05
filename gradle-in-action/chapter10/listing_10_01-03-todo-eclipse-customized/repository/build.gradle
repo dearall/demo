@@ -1,7 +1,8 @@
 apply from: 'databaseSetup.gradle'
 
 repositories {
-    mavenCentral()
+    //mavenCentral()
+    maven { url 'https://maven.aliyun.com/repository/central' }
 }
 
 dependencies {
@@ -22,10 +23,8 @@ sourceSets {
 task integrationTest(type: Test) {
     description = 'Runs the integration tests.'
     group = 'verification'
-    testClassesDir = sourceSets.integrationTest.output.classesDir
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
     classpath = sourceSets.integrationTest.runtimeClasspath
-    dependsOn startAndPrepareDatabase
-    finalizedBy stopDatabase
 }
 
 tasks.withType(Test) {

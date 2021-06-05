@@ -1,9 +1,14 @@
+plugins {
+    id "org.akhikhl.gretty" version "2.0.0"
+}
+
 apply plugin: 'war'
-apply plugin: 'jetty'
+apply plugin: 'org.akhikhl.gretty'
 apply plugin: 'groovy'
 
 repositories {
-    mavenCentral()
+    //mavenCentral()
+    maven { url 'https://maven.aliyun.com/repository/central' }
 }
 
 configurations {
@@ -12,17 +17,20 @@ configurations {
 }
 
 ext.seleniumGroup = 'org.seleniumhq.selenium'
-ext.seleniumVersion = '2.32.0'
+ext.seleniumVersion = '3.141.59'
 
 dependencies {
     compile project(':repository')
-    providedCompile 'javax.servlet:servlet-api:2.5'
-    runtime 'javax.servlet:jstl:1.1.2'
-    testCompile 'org.codehaus.groovy:groovy:2.0.6'
-    testCompile 'junit:junit:4.11'
+    providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+    runtime 'javax.servlet:jstl:1.2'
+    testCompile 'org.codehaus.groovy:groovy:2.4.21'
+    testCompile 'junit:junit:4.13.2'
     functTestCompile 'org.codehaus.geb:geb-junit4:0.7.2'
-    functTestCompile "$seleniumGroup:selenium-api:$seleniumVersion"
-    functTestRuntime "$seleniumGroup:selenium-firefox-driver:$seleniumVersion"
+    functTestCompile "org.gebish:geb-core:5.0-milestone-2"
+//   functTestRuntime "$seleniumGroup:selenium-firefox-driver:$seleniumVersion"
+//   functTestRuntime "$seleniumGroup:selenium-chrome-driver:$seleniumVersion"
+    functTestCompile "$seleniumGroup:selenium-firefox-driver:$seleniumVersion"
+    functTestCompile "$seleniumGroup:selenium-support:$seleniumVersion"
 }
 
 sourceSets {
@@ -34,32 +42,23 @@ sourceSets {
     }
 }
 
-ext {
-    functionalJettyStopPort = 8081
-    functionalJettyStopKey = 'stopKey'
-}
-
-task functionalJettyRun(type: org.gradle.api.plugins.jetty.JettyRun) {
-    stopPort = functionalJettyStopPort
-    stopKey = functionalJettyStopKey
-    contextPath = 'todo'
-    daemon = true
-}
-
-task functionalJettyStop(type: org.gradle.api.plugins.jetty.JettyStop) {
-    stopPort = functionalJettyStopPort
-    stopKey = functionalJettyStopKey
+//When you apply gretty plugin, it adds gretty extension to the project.
+//You can (but you don’t have to) customize every aspect of gretty plugin with the help of gretty DSL:
+gretty {
+    servletContainer = 'jetty9'
+    httpPort=8080
+    // name of existing gradle task,which gretty "encloses" with servlet-container start/stop.
+    integrationTestTask = 'functionalTest'
 }
 
 task functionalTest(type: Test) {
-    testClassesDir = sourceSets.functionalTest.output.classesDir
+    testClassesDirs = sourceSets.functionalTest.output.classesDirs
     classpath = sourceSets.functionalTest.runtimeClasspath
     reports.html.destination = file("$reports.html.destination/functional")
     reports.junitXml.destination = file("$reports.junitXml.destination/functional")
     systemProperty 'geb.env', 'firefox'
+//  systemProperty 'geb.env', 'chrome'
     systemProperty 'geb.build.reportsDir', reporting.file("$name/geb")
-    dependsOn functionalJettyRun
-    finalizedBy functionalJettyStop
 }
 
 check.dependsOn functionalTest

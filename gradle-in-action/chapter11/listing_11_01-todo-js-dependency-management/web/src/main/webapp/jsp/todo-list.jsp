@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>To Do application</title>
-    <script type="text/javascript" src="<c:url value="js/ext/jquery-1.10.0-min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="js/ext/jquery-1.12.4-min.js"/>"></script>
     <c:import url="app-js.jsp"/>
     <link rel="stylesheet" href="<c:url value="css/base.css"/>">
 </head>

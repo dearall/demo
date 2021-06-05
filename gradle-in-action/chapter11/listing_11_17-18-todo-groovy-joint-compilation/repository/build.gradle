@@ -4,12 +4,13 @@ sourceSets.main.java.srcDirs = []
 sourceSets.main.groovy.srcDirs = ['src/main/java', 'src/main/groovy']
 
 repositories {
-    mavenCentral()
+    //mavenCentral()
+    maven { url 'https://maven.aliyun.com/repository/central' }
 }
 
 dependencies {
     compile project(':model')
-    compile 'org.codehaus.groovy:groovy-all:2.0.5'
+    compile 'org.codehaus.groovy:groovy-all:2.4.21'
     runtime 'com.h2database:h2:1.3.170'
-    testCompile 'junit:junit:4.11'
+    testCompile 'junit:junit:4.13.2'
 }

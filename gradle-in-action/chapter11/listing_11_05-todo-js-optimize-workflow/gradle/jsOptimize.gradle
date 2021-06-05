@@ -1,5 +1,6 @@
 repositories {
-    mavenCentral()
+    //mavenCentral()
+    maven { url 'https://maven.aliyun.com/repository/central' }
 }
 
 configurations {
@@ -7,7 +8,7 @@ configurations {
 }
 
 dependencies {
-    googleClosure 'com.google.javascript:closure-compiler:v20130603'
+    googleClosure 'com.google.javascript:closure-compiler:v20131014'
 }
 
 import com.manning.gia.js.GoogleClosureMinifier

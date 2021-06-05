@@ -1,13 +1,14 @@
 apply from: 'databaseSetup.gradle'
 
 repositories {
-    mavenCentral()
+    //mavenCentral()
+    maven { url 'https://maven.aliyun.com/repository/central' }
 }
 
 dependencies {
     compile project(':model')
-    runtime 'com.h2database:h2:1.3.170'
-    testCompile 'junit:junit:4.11'
+    runtime 'com.h2database:h2:1.4.200'
+    testCompile 'junit:junit:4.13.2'
 }
 
 sourceSets {
@@ -22,7 +23,7 @@ sourceSets {
 task integrationTest(type: Test) {
     description = 'Runs the integration tests.'
     group = 'verification'
-    testClassesDir = sourceSets.integrationTest.output.classesDir
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
     classpath = sourceSets.integrationTest.runtimeClasspath
     dependsOn startAndPrepareDatabase
     finalizedBy stopDatabase

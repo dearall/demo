@@ -1,1 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'idea'
+group = 'com.manning.gia'
+version = 0.1
+
