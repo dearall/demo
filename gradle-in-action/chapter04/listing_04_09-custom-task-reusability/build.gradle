@@ -23,6 +23,8 @@ ProjectVersion readVersion() {
 task makeReleaseVersion(type: ReleaseVersionTask) {
     release = version.prodReady
     destFile = new File('project-version.properties')
+
+    logger.quiet 'makeReleaseVersion...'
 }
 
 class ReleaseVersionTask extends DefaultTask {

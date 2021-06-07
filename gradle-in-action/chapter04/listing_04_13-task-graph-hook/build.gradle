@@ -1,4 +1,8 @@
+import org.gradle.api.execution.TaskExecutionGraph
 apply plugin: 'war'
+apply plugin: 'idea'
+
+
 ext.versionFile = file('version.properties')
 
 task loadVersion {
@@ -57,23 +61,25 @@ task release(dependsOn: backupReleaseDistribution) {
 
 tasks.addRule("Pattern: increment<Classifier>Version – Increments the project version classifier.") { String taskName ->
     if (taskName.startsWith('increment') && taskName.endsWith('Version')) {
-        task(taskName) << {
-            String classifier = (taskName - 'increment' - 'Version').toLowerCase()
-            String currentVersion = version.toString()
+        task(taskName) {
+            doLast {
+                String classifier = (taskName - 'increment' - 'Version').toLowerCase()
+                String currentVersion = version.toString()
 
-            switch (classifier) {
-                case 'major': ++version.major
-                    break
-                case 'minor': ++version.minor
-                    break
-                default: throw new GradleException("Invalid version type '$classifier. Allowed types: ['Major', 'Minor']")
-            }
+                switch (classifier) {
+                    case 'major': ++version.major
+                        break
+                    case 'minor': ++version.minor
+                        break
+                    default: throw new GradleException("Invalid version type '$classifier. Allowed types: ['Major', 'Minor']")
+                }
 
-            String newVersion = version.toString()
-            logger.info "Incrementing $classifier project version: $currentVersion -> $newVersion"
+                String newVersion = version.toString()
+                logger.info "Incrementing $classifier project version: $currentVersion -> $newVersion"
 
-            ant.propertyfile(file: versionFile) {
-                entry(key: classifier, type: 'int', operation: '+', value: 1)
+                ant.propertyfile(file: versionFile) {
+                    entry(key: classifier, type: 'int', operation: '+', value: 1)
+                }
             }
         }
     }

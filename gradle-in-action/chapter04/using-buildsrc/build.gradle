@@ -1,6 +1,8 @@
 import com.manning.gia.ProjectVersion
 import com.manning.gia.ReleaseVersionTask
 
+apply plugin: 'idea'
+
 ext.versionFile = file('version.properties')
 project.version = readVersion()
 
