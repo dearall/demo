@@ -1,15 +1,12 @@
-apply plugin: 'groovy'
-
-repositories {
-    mavenCentral()
+plugins{
+    id 'groovy'
 }
-
 dependencies {
-    compile project(':model')
-    testCompile 'junit:junit:4.11'
-    testCompile 'org.testng:testng:6.8'
-    testCompile 'org.codehaus.groovy:groovy:2.0.6'
-    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
+    implementation project(':model')
+    testImplementation 'junit:junit:4.11'
+    testImplementation 'org.testng:testng:7.3.0'
+    testImplementation 'org.codehaus.groovy:groovy:3.0.8'
+    testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.0-groovy-3.0'
 }
 
 task testNG(type: Test) {

@@ -3,6 +3,14 @@
 .settings
 **/.classpath
 
+#idea ignore
+*.ipr
+*.iws
+*.iml
+
+#gradle
+.gradle
+
 #package file
 *.class
 *.war
@@ -24,6 +32,3 @@ build
 *.tmp
 .pmd
 
-# system ignore
-Thumbs.db
-RemoteSystemsTempFiles

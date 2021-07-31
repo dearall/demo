@@ -1,26 +1,27 @@
 apply from: 'databaseSetup.gradle'
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    compile project(':model')
-    runtime 'com.h2database:h2:1.3.170'
-    testCompile 'junit:junit:4.11'
-}
-
 test {
-    reports.html.destination = file("$reports.html.destination/unit")
-    reports.junitXml.destination = file("$reports.junitXml.destination/unit")
+//    reports.html.destination = file("$reports.html.destination/unit")
+//    reports.junitXml.destination = file("$reports.junitXml.destination/unit")
+
+    reports.html.outputLocation.fileValue reports.html.outputLocation.dir("unit").get().asFile
+    reports.junitXml.outputLocation.fileValue reports.junitXml.outputLocation.dir("unit").get().asFile
 }
 
 sourceSets {
     integrationTest {
         java.srcDir file('src/integTest/java')
         resources.srcDir file('src/integTest/resources')
-        compileClasspath = sourceSets.main.output + configurations.testRuntime
+        compileClasspath = sourceSets.main.output + configurations.testRuntimeClasspath
         runtimeClasspath = output + compileClasspath
+
+        println 'sourceSets.main.output:' + sourceSets.main.output
+        println 'configurations.testRuntimeClasspath:' + configurations.testRuntimeClasspath
+        println 'compileClasspath:'+compileClasspath
+
+        println 'output:'+output
+        println 'compileClasspath:'+compileClasspath
+        println 'runtimeClasspath:'+runtimeClasspath
     }
 }
 
@@ -29,8 +30,16 @@ task integrationTest(type: Test) {
     group = 'verification'
     testClassesDirs = sourceSets.integrationTest.output.classesDirs
     classpath = sourceSets.integrationTest.runtimeClasspath
-    reports.html.destination = file("$reports.html.destination/integration")
-    reports.junitXml.destination = file("$reports.junitXml.destination/integration")
+    shouldRunAfter test
+
+    println 'testClassesDirs:'+testClassesDirs
+    println 'classpath:'+classpath
+
+//    reports.html.destination = file("$reports.html.destination/integration")
+//    reports.junitXml.destination = file("$reports.junitXml.destination/integration")
+    reports.html.outputLocation.fileValue reports.html.outputLocation.dir("integration").get().asFile
+    reports.junitXml.outputLocation.fileValue reports.junitXml.outputLocation.dir("integration").get().asFile
+
     dependsOn startAndPrepareDatabase
     finalizedBy stopDatabase
 }
@@ -39,7 +48,14 @@ tasks.withType(Test) {
     testLogging {
         showStandardStreams = true
         exceptionFormat 'full'
+        events "passed", "skipped", "failed"
     }
 }
 
 check.dependsOn integrationTest
+
+dependencies {
+    implementation project(':model')
+    runtimeOnly 'com.h2database:h2:1.3.170'
+    testImplementation 'junit:junit:4.13'
+}

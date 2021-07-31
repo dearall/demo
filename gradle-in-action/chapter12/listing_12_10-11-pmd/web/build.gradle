@@ -1,12 +1,10 @@
-apply plugin: 'war'
-apply plugin: 'jetty'
-
-repositories {
-    mavenCentral()
+plugins {
+    id 'war'
+    id "org.gretty" version "3.0.5"
 }
-
 dependencies {
-    compile project(':repository')
+    implementation project(':model')
+    implementation project(':repository')
     providedCompile 'javax.servlet:servlet-api:2.5'
-    runtime 'javax.servlet:jstl:1.1.2'
+    runtimeOnly 'javax.servlet:jstl:1.1.2'
 }

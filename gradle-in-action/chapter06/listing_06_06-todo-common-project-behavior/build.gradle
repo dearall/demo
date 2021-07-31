@@ -1,5 +1,5 @@
 plugins {
-    id "org.akhikhl.gretty" version "2.0.0"
+    id "org.gretty" version "3.0.5"
 }
 
 allprojects {
@@ -9,25 +9,39 @@ allprojects {
 
 subprojects {
     apply plugin: 'java'
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+        withJavadocJar()
+        withSourcesJar()
+    }
 }
 
+project(':model') {
+
+}
 project(':repository') {
     dependencies {
-        compile project(':model')
+        implementation project(':model')
     }
 }
 
 project(':web') {
     apply plugin: 'war'
-    apply plugin: 'org.akhikhl.gretty'
+    apply plugin: 'org.gretty'
 
     repositories {
-        mavenCentral()
+        //mavenCentral()
+        maven {
+            url 'https://maven.aliyun.com/repository/central'
+        }
     }
 
     dependencies {
-        compile project(':repository')
+        implementation project(':model')
+        implementation project(':repository')
         providedCompile 'javax.servlet:servlet-api:2.5'
-        runtime 'javax.servlet:jstl:1.1.2'
+        runtimeOnly 'javax.servlet:jstl:1.1.2'
     }
 }

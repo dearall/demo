@@ -1,15 +1,26 @@
 buildscript {
     repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath 'org.ajoberstar:gradle-jacoco:0.3.0'
+        maven { url 'https://maven.aliyun.com/repository/central' }
     }
 }
 
-apply plugin: org.ajoberstar.gradle.jacoco.plugins.JacocoPlugin
+apply plugin: "jacoco"
 
 jacoco {
-    integrationTestTaskName = 'integrationTest'
+    toolVersion = "0.8.7"
 }
+
+test {
+    finalizedBy jacocoTestReport // report is always generated after tests run
+}
+
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+
+    reports {
+        xml.required = false
+        csv.required = false
+//        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+}
+

@@ -3,12 +3,16 @@ apply plugin: 'checkstyle'
 ext.checkstyleConfigDir = "$configDir/checkstyle"
 
 checkstyle {
-    toolVersion = '5.6'
+//    toolVersion = '8.44'
+//    toolVersion = '7.6'
+//    toolVersion = '6.19'
+    toolVersion = '5.9'
+
     configFile = new File(checkstyleConfigDir, 'sun_checks.xml')
     ignoreFailures = true
     showViolations = false
 }
-
+/*
 import com.manning.gia.XsltReport
 
 afterEvaluate {
@@ -31,3 +35,15 @@ afterEvaluate {
         }
     }
 }
+*/
+
+
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.required = false
+        html.required = true
+//      html.stylesheet resources.text.fromFile('config/xsl/checkstyle-custom.xsl')
+    }
+}
+

@@ -1,10 +1,6 @@
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    compile project(':model')
-    testCompile 'org.testng:testng:6.8'
+    implementation project(':model')
+    testImplementation 'org.testng:testng:7.3.0'
 }
 
 test.useTestNG()

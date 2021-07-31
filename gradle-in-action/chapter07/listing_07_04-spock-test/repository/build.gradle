@@ -1,11 +1,9 @@
-apply plugin: 'groovy'
-
-repositories {
-    mavenCentral()
+plugins{
+    id 'groovy'
 }
 
 dependencies {
-    compile project(':model')
-    testCompile 'org.codehaus.groovy:groovy:2.4.21'
-    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
+    implementation project(':model')
+    testImplementation 'org.codehaus.groovy:groovy:3.0.8'
+    testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.0-groovy-3.0'
 }

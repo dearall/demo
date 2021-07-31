@@ -1,23 +1,19 @@
 allprojects {
-    apply plugin: 'idea'
     group = 'com.manning.gia'
     version = '0.1'
+    apply plugin: 'idea'
 }
 
 subprojects {
     apply plugin: 'java'
-
     idea {
         module {
             downloadSources = true
             downloadJavadoc = false
         }
     }
-}
-
-idea {
-    project {
-        jdkName = '1.8'
-        languageLevel = '1.8'
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        mavenCentral()
     }
 }

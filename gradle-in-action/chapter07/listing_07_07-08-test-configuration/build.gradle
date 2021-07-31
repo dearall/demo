@@ -1,9 +1,14 @@
 allprojects {
-    apply plugin: 'idea'
     group = 'com.manning.gia'
     version = '0.1'
+
+    apply plugin: 'idea'
 }
 
 subprojects {
     apply plugin: 'java'
+    repositories {
+        //mavenCentral()
+        maven { url 'https://maven.aliyun.com/repository/central' }
+    }
 }

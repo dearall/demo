@@ -3,3 +3,5 @@
 
 2. Gradle web 项目插件 jetty 改为 id "org.akhikhl.gretty" version "2.0.0"
 
+3. Gradle web 项目插件 id "org.akhikhl.gretty" version "2.0.0" 改为 id "org.gretty" version "3.0.5"
+

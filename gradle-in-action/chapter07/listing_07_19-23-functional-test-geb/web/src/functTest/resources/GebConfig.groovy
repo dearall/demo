@@ -2,7 +2,7 @@ import org.openqa.selenium.firefox.FirefoxDriver
 import org.openqa.selenium.chrome.ChromeDriver
 
 waiting {
-    timeout = 2
+    timeout = 5
 }
 
 environments {

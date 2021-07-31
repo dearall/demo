@@ -1,0 +1,12 @@
+pluginManagement {
+    plugins {
+    }
+    resolutionStrategy {
+    }
+    repositories {
+    }
+}
+
+rootProject.name = 'chapter02-7'
+
+include 'hello-world'

@@ -6,4 +6,8 @@ allprojects {
 
 subprojects {
     apply plugin: 'java'
+    repositories {
+        //mavenCentral()
+        maven { url 'https://maven.aliyun.com/repository/central' }
+    }
 }

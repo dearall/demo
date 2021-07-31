@@ -1,0 +1,22 @@
+plugins{
+	id 'application'
+}
+application {
+	mainClass = 'com.apress.prospring5.ch2.HelloWorldSpringDI'
+}
+
+dependencies {
+	implementation  spring.context, misc.slf4jJcl, misc.logback
+	testImplementation testing.junit
+}
+
+jar {
+	manifest {
+		attributes(
+				"Created-By": "Iuliana Cosmina",
+				"Specification-Title": "Pro Spring 5",
+				"Main-Class" : "com.apress.prospring5.ch2.HelloWorldSpringDI",
+				"Class-Path": configurations.compileClasspath.collect { it.getName() }.join(' ')
+		)
+	}
+}

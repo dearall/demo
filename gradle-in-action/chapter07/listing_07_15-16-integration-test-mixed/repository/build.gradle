@@ -1,27 +1,20 @@
 apply from: 'databaseSetup.gradle'
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    compile project(':model')
-    runtime 'com.h2database:h2:1.3.170'
-    testCompile 'junit:junit:4.11'
-}
-
 test {
     exclude '**/*IntegTest.class'
-    reports.html.destination = file("$reports.html.destination/unit")
-    reports.junitXml.destination = file("$reports.junitXml.destination/unit")
+    println reports.html.outputLocation.dir("unit").get().asFile.absolutePath
+    println reports.junitXml.outputLocation.dir("unit").get().asFile.absolutePath
+
+    reports.html.outputLocation.fileValue reports.html.outputLocation.dir("unit").get().asFile
+    reports.junitXml.outputLocation.fileValue reports.junitXml.outputLocation.dir("unit").get().asFile
 }
 
 task integrationTest(type: Test) {
     description = 'Runs the integration tests.'
     group = 'verification'
     include '**/*IntegTest.class'
-    reports.html.destination = file("$reports.html.destination/integration")
-    reports.junitXml.destination = file("$reports.junitXml.destination/integration")
+    reports.html.outputLocation.fileValue reports.html.outputLocation.dir("integration").get().asFile
+    reports.junitXml.outputLocation.fileValue reports.junitXml.outputLocation.dir("integration").get().asFile
     dependsOn startAndPrepareDatabase
     finalizedBy stopDatabase
 }
@@ -30,7 +23,14 @@ tasks.withType(Test) {
     testLogging {
         showStandardStreams = true
         exceptionFormat 'full'
+        events "passed", "skipped", "failed"
     }
 }
 
 check.dependsOn integrationTest
+
+dependencies {
+    implementation project(':model')
+    runtimeOnly 'com.h2database:h2:1.3.170'
+    testImplementation 'junit:junit:4.13'
+}

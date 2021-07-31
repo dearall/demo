@@ -1,13 +1,7 @@
 plugins {
-    id "org.akhikhl.gretty" version "2.0.0"
-}
-apply plugin: 'war'
-apply plugin: 'org.akhikhl.gretty'
-apply plugin: 'groovy'
-
-repositories {
-    //mavenCentral()
-    maven { url 'https://maven.aliyun.com/repository/central' }
+    id 'war'
+    id "org.gretty" version "3.0.6"
+    id 'groovy'
 }
 
 configurations {
@@ -19,12 +13,13 @@ ext.seleniumGroup = 'org.seleniumhq.selenium'
 ext.seleniumVersion = '3.141.59'
 
 dependencies {
-    compile project(':repository')
+    implementation project(':model')
+    implementation project(':repository')
     providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
-    runtime 'javax.servlet:jstl:1.2'
-    runtime 'taglibs:standard:1.1.2'
+    runtimeOnly 'javax.servlet:jstl:1.2'
+    runtimeOnly 'taglibs:standard:1.1.2'
     testCompile 'org.codehaus.groovy:groovy:2.4.21'
-    testCompile 'junit:junit:4.11'
+    testCompile 'junit:junit:4.13.2'
     functTestCompile 'org.codehaus.geb:geb-junit4:0.7.2'
     functTestCompile "$seleniumGroup:selenium-api:$seleniumVersion"
     functTestRuntime "$seleniumGroup:selenium-firefox-driver:$seleniumVersion"
@@ -42,8 +37,9 @@ sourceSets {
 task functionalTest(type: Test) {
     testClassesDirs = sourceSets.functionalTest.output.classesDirs
     classpath = sourceSets.functionalTest.runtimeClasspath
-    reports.html.destination = file("$reports.html.destination/functional")
-    reports.junitXml.destination = file("$reports.junitXml.destination/functional")
+    reports.html.outputLocation.fileValue reports.html.outputLocation.dir("functional").get().asFile
+    reports.junitXml.outputLocation.fileValue reports.junitXml.outputLocation.dir("functional").get().asFile
+
     systemProperty 'geb.env', 'firefox'
     systemProperty 'geb.build.reportsDir', reporting.file("$name/geb")
 }

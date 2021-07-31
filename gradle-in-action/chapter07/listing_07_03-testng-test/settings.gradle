@@ -1,1 +1,3 @@
+rootProject.name='chapter07'
+
 include 'model', 'repository', 'web'
